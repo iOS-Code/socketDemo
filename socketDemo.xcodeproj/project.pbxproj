@@ -13,7 +13,7 @@
 		B003517420B66BD500A24268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B003517320B66BD500A24268 /* Assets.xcassets */; };
 		B003517720B66BD500A24268 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B003517520B66BD500A24268 /* LaunchScreen.storyboard */; };
 		B003517A20B66BD500A24268 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B003517920B66BD500A24268 /* main.m */; };
-		B003518220B66BF000A24268 /* EHSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B003518120B66BF000A24268 /* EHSocketManager.m */; };
+		B027EFFF20BD546200127031 /* EHWebSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B027EFFE20BD546200127031 /* EHWebSocketManager.m */; };
 		E2941CAB8324552EDF0EDE5C /* Pods_socketDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D87C12FBC26850E373E5C69 /* Pods_socketDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 		B003517620B66BD500A24268 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B003517820B66BD500A24268 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B003517920B66BD500A24268 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B003518020B66BF000A24268 /* EHSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EHSocketManager.h; sourceTree = "<group>"; };
-		B003518120B66BF000A24268 /* EHSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EHSocketManager.m; sourceTree = "<group>"; };
+		B027EFFD20BD546200127031 /* EHWebSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EHWebSocketManager.h; sourceTree = "<group>"; };
+		B027EFFE20BD546200127031 /* EHWebSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EHWebSocketManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +89,8 @@
 				B003516B20B66BD300A24268 /* AppDelegate.m */,
 				B003516D20B66BD300A24268 /* ViewController.h */,
 				B003516E20B66BD300A24268 /* ViewController.m */,
-				B003518020B66BF000A24268 /* EHSocketManager.h */,
-				B003518120B66BF000A24268 /* EHSocketManager.m */,
+				B027EFFD20BD546200127031 /* EHWebSocketManager.h */,
+				B027EFFE20BD546200127031 /* EHWebSocketManager.m */,
 				B003517020B66BD300A24268 /* Main.storyboard */,
 				B003517320B66BD500A24268 /* Assets.xcassets */,
 				B003517520B66BD500A24268 /* LaunchScreen.storyboard */,
@@ -176,10 +176,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-socketDemo/Pods-socketDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -212,9 +214,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B003516F20B66BD300A24268 /* ViewController.m in Sources */,
-				B003518220B66BF000A24268 /* EHSocketManager.m in Sources */,
 				B003517A20B66BD500A24268 /* main.m in Sources */,
 				B003516C20B66BD300A24268 /* AppDelegate.m in Sources */,
+				B027EFFF20BD546200127031 /* EHWebSocketManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +361,10 @@
 				DEVELOPMENT_TEAM = ZT38DY35DB;
 				INFOPLIST_FILE = socketDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enhance.socketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -375,7 +380,10 @@
 				DEVELOPMENT_TEAM = ZT38DY35DB;
 				INFOPLIST_FILE = socketDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.enhance.socketDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

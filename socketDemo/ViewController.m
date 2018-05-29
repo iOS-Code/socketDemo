@@ -14,8 +14,9 @@
 #import <netinet/in.h>
 #import <sys/socket.h>
 
+#import "EHWebSocketManager.h"
 
-@interface ViewController ()<GCDAsyncSocketDelegate, NSStreamDelegate>
+@interface ViewController ()<GCDAsyncSocketDelegate, NSStreamDelegate, SRWebSocketDelegate>
 {
     NSInputStream *_inputStream;
     NSOutputStream *_outputSteam;
@@ -48,9 +49,14 @@
     
 //    [self testOCSocket];
     
-    [self testGCDAsynSocket];
+//    [self testGCDAsynSocket];
     
 //    [self startSocket:@"127.0.0.1" andPort:12345];
+    
+//    [self testWebsocket];
+    
+    [self testEHWebSocket];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -290,6 +296,81 @@
     // 把缓冲区里的实现字节数转成字符串
     NSString *receiverStr = [[NSString alloc] initWithBytes:buf length:len encoding:NSUTF8StringEncoding];
     NSLog(@"%@",receiverStr);
+}
+
+
+#pragma mark - Websocket
+- (void)testWebsocket
+{
+    SRWebSocket * socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://118.25.40.163:8088"]]];
+    socket.delegate = self;
+    [socket open];
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+{
+    NSLog(@"连接成功，可以立刻登录你公司后台的服务器了，还有开启心跳");
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
+{
+    NSLog(@"连接失败，这里可以实现掉线自动重连");
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
+{
+    NSLog(@"连接断开，清空socket对象，清空该清空的东西，还有关闭心跳！");
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceivePong:(NSData *)pongPayload
+{
+    NSLog(@"收到peng %@",pongPayload);
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
+{
+    NSLog(@"收到消息  %@",message);
+}
+
+
+#pragma mark -
+- (void)testEHWebSocket
+{
+    self.view.backgroundColor = [UIColor redColor];
+    
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 400, 300, 60)];
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn setTitle:@"发送数据" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(clickBtn4444) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+    [[EHWebSocketManager shareManager] SRWebSocketOpenWithURLString:@"ws://118.25.40.163:8088"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SRWebSocketDidOpen) name:kWebSocketDidOpenNote object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SRWebSocketDidClose) name:kWebSocketDidCloseNote object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kWebSocketdidReceiveMessageNote:) name:kWebSocketDidCloseNote object:nil];
+}
+
+- (void)clickBtn4444
+{
+    NSString *msg = @"发送数据: 你好";
+    [[EHWebSocketManager shareManager] sendData:msg];
+}
+
+- (void)SRWebSocketDidOpen
+{
+    NSLog(@"SRWebSocketDidOpen");
+}
+
+- (void)SRWebSocketDidClose
+{
+    NSLog(@"SRWebSocketDidClose");
+}
+
+- (void)kWebSocketdidReceiveMessageNote:(NSNotification *)info
+{
+    NSLog(@"kWebSocketdidReceiveMessageNote:%@",info.userInfo);
 }
 
 @end

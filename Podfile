@@ -7,6 +7,7 @@ target 'socketDemo' do
 
 inhibit_all_warnings!  
 
-pod 'CocoaAsyncSocket'  
+pod 'CocoaAsyncSocket'
+pod 'SocketRocket'
 
 end
