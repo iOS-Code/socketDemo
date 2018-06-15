@@ -31,14 +31,12 @@
  长连接选择TCP协议还是UDP协议
  使用TCP进行数据传输的话，简单、安全、可靠，但是带来的是服务端承载压力比较大。
  使用UDP进行数据传输的话，效率比较高，带来的服务端压力较小，但是需要自己保证数据的可靠性，不作处理的话，会导致丢包、乱序等问题。
- 如果你的技术团队实力过硬，你可以选择UDP协议，否则还是使用TCP协议比较好。据说腾讯IM就是使用的UDP协议，然后还封装了自己的是有协议，来保证UDP数据包的可靠传输。
- 
+ 如果技术团队实力过硬，可以选择UDP协议，否则还是使用TCP协议比较好。
+ 据说腾讯IM就是使用的UDP协议，然后还封装了自己的是有协议，来保证UDP数据包的可靠传输。
  
  长连接为什么要保持心跳？
  国内移动无线网络运营商在链路上一段时间内没有数据通讯后, 会淘汰NAT表中的对应项, 造成链路中断。而国内的运营商一般NAT超时的时间为5分钟，所以通常我们心跳设置的时间间隔为3-5分钟。
  
- 
- 打开mac命令行终端 输入 nc -lk 12345
  */
 
 @implementation ViewController
@@ -302,7 +300,7 @@
 #pragma mark - Websocket
 - (void)testWebsocket
 {
-    SRWebSocket * socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://118.25.40.163:8088"]]];
+    SRWebSocket * socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://123.207.167.163:9010/ajaxchattest"]]];
     socket.delegate = self;
     [socket open];
 }
@@ -345,7 +343,7 @@
     [btn addTarget:self action:@selector(clickBtn4444) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
-    [[EHWebSocketManager shareManager] SRWebSocketOpenWithURLString:@"ws://118.25.40.163:8088"];
+    [[EHWebSocketManager shareManager] SRWebSocketOpenWithURLString:@"ws://123.207.167.163:9010/ajaxchattest"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SRWebSocketDidOpen) name:kWebSocketDidOpenNote object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(SRWebSocketDidClose) name:kWebSocketDidCloseNote object:nil];

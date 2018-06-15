@@ -176,7 +176,7 @@ NSString * const kWebSocketdidReceiveMessageNote = @"kWebSocketdidReceiveMessage
 {
     //发送心跳
     //还需要和后台约定发送什么内容  没有什么要求也可以调用ping
-    [self sendData:@"heart"];
+    [self sendData:@"HEART"];
 //    [self ping];
 }
 
